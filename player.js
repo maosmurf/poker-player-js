@@ -11,18 +11,20 @@ function weArePreflop(game)
 }
 function weHavePairsHoleCards(holeCards)
 {
-    return (holeCards[0] === holeCards[1]);
+    return (holeCards[0].rank === holeCards[1].rank);
 }
 function countCoolCard(holeCards)
 {
-    var coolCards = {J: 'J', Q: 'Q', K: 'K', A: 'A'};
+    var coolCards = {ten: '10', J: 'J', Q: 'Q', K: 'K', A: 'A'};
 
     var myCoolCards = 0;
+
+    // TODO rank cool cards
 
     holeCards.forEach(function (card)
     {
         for(var coolCard in coolCards) {
-            if (coolCard == card) {
+            if (coolCard == card.rank) {
                 myCoolCards++;
             }
         }
@@ -34,9 +36,9 @@ function countCoolCard(holeCards)
 function raiseAmount(game, me, raiseFactor)
 {
     var currentBuyIn = game.current_buy_in;
-    var bet = me.bet;
+    var myBet = me.bet;
     var minimumRaise = game.minimum_raise;
-    return currentBuyIn - bet + raiseFactor * minimumRaise;
+    return currentBuyIn - myBet + raiseFactor * minimumRaise;
 }
 
 //function getRank(game, holeCards)
@@ -137,7 +139,7 @@ function getRankLocally(allCards)
 
 module.exports = {
 
-  VERSION: "Default JavaScript folding player V17",
+  VERSION: "Default JavaScript folding player V19",
 
   bet_request: function(game_state) {
 
@@ -147,7 +149,7 @@ module.exports = {
           console.log("weArePreflop");
           if (weHavePairsHoleCards(me.hole_cards)) {
               console.log("weHavePairsHoleCards");
-              return  raiseAmount(game, me, 8);
+              return  ALL_IN;
           }
           if (countCoolCard(me.hole_cards) == 2) {
               console.log("2 countCoolCard");
@@ -159,13 +161,13 @@ module.exports = {
           }
           return 0;
       }
+
       var allCards = me.hole_cards.concat(game.community_cards);
 
       const rank = getRankLocally(allCards);
       if (rank > 0) {
           console.log("rank " + rank);
           return ALL_IN;
-
       }
 
       return 0;
