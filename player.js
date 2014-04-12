@@ -2,6 +2,7 @@
 var querystring = require('querystring');
 var http = require('http');
 var fs = require('fs');
+var helper = require('./helper');
 
 const ALL_IN = 666 * 666;
 
