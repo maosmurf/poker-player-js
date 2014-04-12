@@ -51,18 +51,24 @@ function getRank(game, holeCards)
 
         var rank = -1;
 
+        console.log("get rank?");
+
         var req = http.request(options, function(res){
             res.setEncoding('utf8');
             res.on('data', function(chunk){
-                rank = 0;
-                console.log("body: " + chunk);
+                var response = JSON.parse(chunk);
+                rank = response.rank;
+                console.log("rank: " + rank);
             });
         });
 
         var data = JSON.stringify(allCards);
 
+        console.log("get rank write?");
         req.write(data);
+        console.log("get rank end?");
         req.end();
+        console.log("get rank while?");
 
         while(rank < 0) {
             continue;
@@ -86,7 +92,7 @@ function getRank(game, holeCards)
 
 module.exports = {
 
-  VERSION: "Default JavaScript folding player V13",
+  VERSION: "Default JavaScript folding player V14",
 
   bet_request: function(game_state) {
 
