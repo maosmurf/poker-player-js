@@ -198,8 +198,8 @@ module.exports = {
             }
             if (this.countCoolCard(me.hole_cards) == 1) {
                 console.log("1 countCoolCard 2");
-                const potetntialRaise = this.callAmount(game);
-                if (this.betTooLargeForMyStack(potetntialRaise, me.stack, 30)) {
+                const potential = this.callAmount(game);
+                if (this.betTooLargeForMyStack(potential, me.stack, 30)) {
                     console.log("bet too high 2, folding");
                     return 0;
                 }
