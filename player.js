@@ -2,6 +2,10 @@ function weArePreflop(game)
 {
     return game.community_cards === undefined || game.community_cards.length < 1;
 }
+function weHavePairs(holeCards)
+{
+    return (holeCards[0] === holeCards[1]);
+}
 function countCoolCard(holeCards)
 {
     var coolCards = {J: 'J', Q: 'Q', K: 'K', A: 'A'};
@@ -22,7 +26,7 @@ function countCoolCard(holeCards)
 
 module.exports = {
 
-  VERSION: "Default JavaScript folding player V 0.0.4",
+  VERSION: "Default JavaScript folding player V 0.0.5",
 
   bet_request: function(game_state) {
       var game = JSON.parse(game_state);
@@ -30,13 +34,15 @@ module.exports = {
       var holeCards = me.hole_cards;
       if (weArePreflop(game))
       {
-          return game.current_buy_in - me.bet + 3 * game.minumum_raise;
-      }
-      if (countCoolCard(holeCards) == 2) {
-          return game.current_buy_in - me.bet + 8 * game.minumum_raise;
-      }
-      if (countCoolCard(holeCards) == 1) {
-          return game.current_buy_in - me.bet + 5 * game.minumum_raise;
+          if (weHavePairs(holeCards)) {
+              return game.current_buy_in - me.bet + 8 * game.minumum_raise;
+          }
+          if (countCoolCard(holeCards) == 2) {
+              return game.current_buy_in - me.bet + 8 * game.minumum_raise;
+          }
+          if (countCoolCard(holeCards) == 1) {
+              return game.current_buy_in - me.bet + 5 * game.minumum_raise;
+          }
       }
       return 0;
   },
