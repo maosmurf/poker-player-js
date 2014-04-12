@@ -37,45 +37,23 @@ function raiseAmount(game, me, raiseFactor)
     var minimumRaise = game.minimum_raise;
     return currentBuyIn - bet + raiseFactor * minimumRaise;
 }
-//function getRank(game)
-//{
-//    var allCards = holeCards.concat(game.community_cards);
-//
-//    httpsync.request({
-//        url: "http://localhost:2048/",
-//          method: "POST"
-//    });
-//
-//    var post_data = querystring.stringify({
-//            'cards' : allCards
-//      });
-//
-//    var post_options = {
-//          host: 'localhost',
-//          port: '2048',
-//          path: '/',
-//          method: 'POST',
-//          headers: {
-//              'Content-Type': 'application/x-www-form-urlencoded',
-//              'Content-Length': post_data.length
-//          }
-//      };
-//
-//    var rank = -1;
-//    var post_req = http.request(post_options, function(res) {
-//          res.setEncoding('utf8');
-//          res.on('data', function (chunk) {
-//              rank = data.
-//          });
-//      });
-//
-//    post_req.write(post_data);
-//      post_req.end();
-//
-//}
+function getRank(game)
+{
+    var allCards = holeCards.concat(game.community_cards);
+
+    var req = httpsync.request({
+        url: "http://localhost:2048/",
+          method: "POST"
+    });
+
+    req.write(JSON.stringify(allCards));
+     var rank = req.end();
+    return rank;
+}
+
 module.exports = {
 
-  VERSION: "Default JavaScript folding player V10",
+  VERSION: "Default JavaScript folding player V11",
 
   bet_request: function(game_state) {
 
@@ -99,7 +77,9 @@ module.exports = {
       if (countCoolCard(me.hole_cards) == 2) {
           return raiseAmount(game, me, 1);
       }
-//      var rank = getRank(game);
+      console.log('rank');
+      var rank = getRank(game);
+      console.log(rank);
 
       return 0;
   },
