@@ -80,16 +80,36 @@ module.exports = {
         const raiseAmount = currentBuyIn - myBet + raiseFactor * minimumRaise;
 
         var debug = {
+            method: 'raiseAmount',
             currentBuyIn: currentBuyIn,
             myBet: myBet,
             minimumRaise: minimumRaise,
-            raiseAmount: raiseAmount,
-
+            raiseAmount: raiseAmount
         };
 
         console.log(debug);
 
         return  raiseAmount;
+    },
+    raiseTimes: function() {
+        var currentBuyIn = game.current_buy_in;
+        var myBet = me.bet;
+        var minimumRaise = game.minimum_raise;
+
+        const raiseAmount = Math.round(currentBuyIn + raiseFactor * minimumRaise);
+
+        var debug = {
+            method: 'raiseTimes',
+            currentBuyIn: currentBuyIn,
+            myBet: myBet,
+            minimumRaise: minimumRaise,
+            raiseAmount: raiseAmount
+        };
+
+        console.log(debug);
+
+        return  raiseAmount;
+
     }
 };
 

@@ -24,11 +24,11 @@ module.exports = {
           }
           if (helper.countCoolCard(me.hole_cards) == 2) {
               console.log("2 countCoolCard");
-              return helper.raiseAmount(game, me, 8);
+              return helper.raiseTimes(game, me, 4);
           }
           if (helper.countCoolCard(me.hole_cards) == 1) {
               console.log("1 countCoolCard");
-              return helper.raiseAmount(game, me, 5);
+              return helper.raiseTimes(game, me, 2);
           }
           return 0;
       }
