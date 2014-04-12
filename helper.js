@@ -132,6 +132,7 @@ module.exports = {
     },
     strategyThreeOrMore: function(game) {
         
+        var me = game.players[game.in_action];
         console.log("strat N");
         if (this.weArePreflop(game)) {
             console.log("weArePreflop N");
