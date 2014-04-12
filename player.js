@@ -4,19 +4,23 @@ var http = require('http');
 var fs = require('fs');
 var helper = require('./helper');
 
-const ALL_IN = 666 * 666;
-
 
 
 module.exports = {
 
-  VERSION: "Default JavaScript folding player V24",
+  VERSION: "Default JavaScript folding player V25",
 
   bet_request: function(game_state) {
 
       var game = JSON.parse(game_state);
       var me = game.players[game.in_action];
+      const activePlayers = helper.countActivePlayers(game.players);
 
+      if (activePlayers >= 3) {
+          return helper.strategyThreeOrMore(game);
+      } else if (activePlayers == 2) {
+          return helper.strategyHeadsUp(game);
+      }
 
       if (helper.weArePreflop(game)) {
           console.log("weArePreflop");

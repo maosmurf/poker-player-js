@@ -1,3 +1,5 @@
+const ALL_IN = 666 * 666;
+
 module.exports = {
   help: function() {
       return 0;
@@ -91,12 +93,13 @@ module.exports = {
 
         return  raiseAmount;
     },
-    raiseTimes: function() {
+    raiseTimes: function(game, me, raiseFactor) {
+
         var currentBuyIn = game.current_buy_in;
         var myBet = me.bet;
         var minimumRaise = game.minimum_raise;
 
-        const raiseAmount = Math.round(currentBuyIn - myBet + raiseFactor * minimumRaise);
+        var raiseAmount = Math.round(currentBuyIn - myBet + raiseFactor * minimumRaise);
 
         var debug = {
             method: 'raiseTimes',
@@ -111,6 +114,11 @@ module.exports = {
         return  raiseAmount;
 
     },
+    callAmount: function(game) {
+        var me = game.players[game.in_action];
+        return this.raiseAmount(game, me, 0);
+        
+    },
     countActivePlayers: function(players) {
         var activePlayers = 0;
         players.forEach(function(player){
@@ -121,6 +129,78 @@ module.exports = {
         });
 
         return activePlayers;
+    },
+    strategyThreeOrMore: function(game) {
+        
+        console.log("strat N");
+        if (this.weArePreflop(game)) {
+            console.log("weArePreflop N");
+            if (this.weHavePairsHoleCards(me.hole_cards)) {
+                console.log("weHavePairsHoleCards N");
+                return  ALL_IN;
+            }
+            if (this.countCoolCard(me.hole_cards) == 2) {
+                console.log("2 countCoolCard N");
+                return this.raiseTimes(game, me, 4);
+            }
+            if (this.countCoolCard(me.hole_cards) == 1) {
+                console.log("1 countCoolCard N");
+                return this.callAmount(game);
+            }
+            return 0;
+        }
+  
+        var allCards = me.hole_cards.concat(game.community_cards);
+  
+        const rank = this.getRankLocally(allCards);
+        if (rank > 1) {
+            console.log("rank " + rank);
+            return ALL_IN;
+        }
+        if (rank > 0) {
+            console.log("rank " + rank);
+            return game.currentBuyIn;
+        }
+        
+        
+        return 0;
+    },
+    strategyHeadsUp: function(game) {
+        console.log("strat 2");
+
+        var me = game.players[game.in_action];
+        if (this.weArePreflop(game)) {
+            console.log("weArePreflop");
+            if (this.weHavePairsHoleCards(me.hole_cards)) {
+                console.log("weHavePairsHoleCards");
+                return  ALL_IN;
+            }
+            if (this.countCoolCard(me.hole_cards) == 2) {
+                console.log("2 countCoolCard");
+                return this.raiseTimes(game, me, 4);
+            }
+            if (this.countCoolCard(me.hole_cards) == 1) {
+                console.log("1 countCoolCard");
+                return this.raiseTimes(game, me, 2);
+            }
+            return 0;
+        }
+  
+        var allCards = me.hole_cards.concat(game.community_cards);
+  
+        const rank = this.getRankLocally(allCards);
+        if (rank > 1) {
+            console.log("rank " + rank);
+            return ALL_IN;
+        }
+        if (rank > 0) {
+            console.log("rank " + rank);
+            return game.currentBuyIn;
+        }
+        
+        
+        return 0;
+        
     }
 };
 
