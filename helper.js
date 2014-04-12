@@ -110,6 +110,12 @@ module.exports = {
 
         return  raiseAmount;
 
+    },
+    countActivePlayers: function(players) {
+        players.forEach(function(){});
+
+        return 1;
+
     }
 };
 

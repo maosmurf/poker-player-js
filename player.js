@@ -16,6 +16,8 @@ module.exports = {
 
       var game = JSON.parse(game_state);
       var me = game.players[game.in_action];
+
+
       if (helper.weArePreflop(game)) {
           console.log("weArePreflop");
           if (helper.weHavePairsHoleCards(me.hole_cards)) {
