@@ -36,19 +36,19 @@ module.exports = {
       var game = JSON.parse(game_state);
       var me = game.players[game.in_action];
       var holeCards = me.hole_cards;
-      if (weArePreflop(game))
-      {
-          if (weHavePairs(holeCards)) {
-              return  raiseAmount(game, me, 8);
-          }
-          if (countCoolCard(holeCards) == 2) {
-              return raiseAmount(game, me, 8);
-          }
-          if (countCoolCard(holeCards) == 1) {
-              return raiseAmount(game, me, 5);
-          }
-          return raiseAmount(game, me, 3);
+      if (weHavePairs(holeCards)) {
+          return  raiseAmount(game, me, 8);
       }
+      if (countCoolCard(holeCards) == 2) {
+          return raiseAmount(game, me, 8);
+      }
+      if (countCoolCard(holeCards) == 1) {
+          return raiseAmount(game, me, 5);
+      }
+      return raiseAmount(game, me, 3);
+//      if (weArePreflop(game))
+//      {
+//      }
       return 0;
   },
 
