@@ -25,7 +25,7 @@ function countCoolCard(holeCards)
     holeCards.forEach(function (card)
     {
         for(var coolCard in coolCards) {
-            if (coolCard == card.rank) {
+            if (coolCards[coolCard] == card.rank) {
                 myCoolCards++;
             }
         }
@@ -125,13 +125,13 @@ function getRankLocally(allCards)
     });
 
     for (var color in colors) {
-        if (color == 5) return 5;
+        if (colors[color] == 5) return 5;
     }
 
     for (var rank in ranks) {
-        if (rank == 2) return 1;
-        if (rank == 3) return 3;
-        if (rank == 4) return 7;
+        if (ranks[rank] == 2) return 1;
+        if (ranks[rank] == 3) return 3;
+        if (ranks[rank] == 4) return 7;
     }
 
     return 0;
@@ -140,7 +140,7 @@ function getRankLocally(allCards)
 
 module.exports = {
 
-  VERSION: "Default JavaScript folding player V19",
+  VERSION: "Default JavaScript folding player V20",
 
   bet_request: function(game_state) {
 

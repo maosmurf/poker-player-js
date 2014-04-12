@@ -47,7 +47,7 @@
             "hole_cards": [                         
                                                     
                 {
-                    "rank": "7",                    
+                    "rank": "10",
                     "suit": "hearts"                
                 },
                 {
@@ -63,20 +63,6 @@
             "version": "Default random player",
             "stack": 0,
             "bet": 0
-        }
-    ],
-    "community_cards": [                            
-        {
-            "rank": "4",
-            "suit": "spades"
-        },
-        {
-            "rank": "A",
-            "suit": "hearts"
-        },
-        {
-            "rank": "6",
-            "suit": "clubs"
         }
     ]
 }
