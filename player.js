@@ -39,7 +39,20 @@ function raiseAmount(game, me, raiseFactor)
     var currentBuyIn = game.current_buy_in;
     var myBet = me.bet;
     var minimumRaise = game.minimum_raise;
-    return currentBuyIn - myBet + raiseFactor * minimumRaise;
+
+    const raiseAmount = currentBuyIn - myBet + raiseFactor * minimumRaise;
+
+    var debug = {
+        currentBuyIn: currentBuyIn,
+        myBet: myBet,
+        minimumRaise: minimumRaise,
+        raiseAmount: raiseAmount,
+
+    };
+
+    console.log(debug);
+
+    return  raiseAmount;
 }
 
 //function getRank(game, holeCards)
@@ -140,7 +153,7 @@ function getRankLocally(allCards)
 
 module.exports = {
 
-  VERSION: "Default JavaScript folding player V20",
+  VERSION: "Default JavaScript folding player V21",
 
   bet_request: function(game_state) {
 
