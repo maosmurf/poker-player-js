@@ -26,7 +26,7 @@ function countCoolCard(holeCards)
 
 module.exports = {
 
-  VERSION: "Default JavaScript folding player V 0.0.5",
+  VERSION: "Default JavaScript folding player V7",
 
   bet_request: function(game_state) {
       var game = JSON.parse(game_state);
@@ -43,6 +43,7 @@ module.exports = {
           if (countCoolCard(holeCards) == 1) {
               return game.current_buy_in - me.bet + 5 * game.minumum_raise;
           }
+          return game.current_buy_in - me.bet + 3 * game.minumum_raise;
       }
       return 0;
   },
