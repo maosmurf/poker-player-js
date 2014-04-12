@@ -171,18 +171,23 @@ module.exports = {
 
         var me = game.players[game.in_action];
         if (this.weArePreflop(game)) {
-            console.log("weArePreflop");
+            console.log("weArePreflop 2");
             if (this.weHavePairsHoleCards(me.hole_cards)) {
-                console.log("weHavePairsHoleCards");
+                console.log("weHavePairsHoleCards 2");
                 return  ALL_IN;
             }
             if (this.countCoolCard(me.hole_cards) == 2) {
-                console.log("2 countCoolCard");
+                console.log("2 countCoolCard 2");
                 return this.raiseTimes(game, me, 4);
             }
             if (this.countCoolCard(me.hole_cards) == 1) {
-                console.log("1 countCoolCard");
-                return this.raiseTimes(game, me, 2);
+                console.log("1 countCoolCard 2");
+                const potetntialRaise = this.callAmount(game);
+                if (this.betTooLargeForMyStack(potetntialRaise, me.stack, 30)) {
+                    console.log("bet too high 2, folding");
+                    return 0;
+                }
+                console.log("1 countCoolCard 2");
             }
             return 0;
         }
