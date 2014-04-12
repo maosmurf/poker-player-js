@@ -10,7 +10,7 @@ const ALL_IN = 666 * 666;
 
 module.exports = {
 
-  VERSION: "Default JavaScript folding player V22",
+  VERSION: "Default JavaScript folding player V23",
 
   bet_request: function(game_state) {
 
@@ -36,9 +36,13 @@ module.exports = {
       var allCards = me.hole_cards.concat(game.community_cards);
 
       const rank = helper.getRankLocally(allCards);
-      if (rank > 0) {
+      if (rank > 1) {
           console.log("rank " + rank);
           return ALL_IN;
+      }
+      if (rank > 0) {
+          console.log("rank " + rank);
+          return game.currentBuyIn;
       }
 
       return 0;
