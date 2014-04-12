@@ -138,7 +138,7 @@ module.exports = {
             console.log("weArePreflop N");
             if (this.weHavePairsHoleCards(me.hole_cards)) {
                 console.log("weHavePairsHoleCards N");
-                return  ALL_IN;
+                return ALL_IN;
             }
             if (this.countCoolCard(me.hole_cards) == 2) {
                 console.log("2 countCoolCard N");
