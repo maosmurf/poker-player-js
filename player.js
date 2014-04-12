@@ -10,7 +10,7 @@ const ALL_IN = 666 * 666;
 
 module.exports = {
 
-  VERSION: "Default JavaScript folding player V23",
+  VERSION: "Default JavaScript folding player V24",
 
   bet_request: function(game_state) {
 

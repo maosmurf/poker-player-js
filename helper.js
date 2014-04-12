@@ -96,7 +96,7 @@ module.exports = {
         var myBet = me.bet;
         var minimumRaise = game.minimum_raise;
 
-        const raiseAmount = Math.round(currentBuyIn + raiseFactor * minimumRaise);
+        const raiseAmount = Math.round(currentBuyIn - myBet + raiseFactor * minimumRaise);
 
         var debug = {
             method: 'raiseTimes',
