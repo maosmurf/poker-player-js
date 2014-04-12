@@ -137,27 +137,33 @@ function getRankLocally(allCards)
 
 module.exports = {
 
-  VERSION: "Default JavaScript folding player V16",
+  VERSION: "Default JavaScript folding player V17",
 
   bet_request: function(game_state) {
 
       var game = JSON.parse(game_state);
       var me = game.players[game.in_action];
       if (weArePreflop(game)) {
+          console.log("weArePreflop");
           if (weHavePairsHoleCards(me.hole_cards)) {
+              console.log("weHavePairsHoleCards");
               return  raiseAmount(game, me, 8);
           }
           if (countCoolCard(me.hole_cards) == 2) {
+              console.log("2 countCoolCard");
               return raiseAmount(game, me, 8);
           }
           if (countCoolCard(me.hole_cards) == 1) {
+              console.log("1 countCoolCard");
               return raiseAmount(game, me, 5);
           }
           return 0;
       }
       var allCards = me.hole_cards.concat(game.community_cards);
 
-      if (getRankLocally(allCards) > 0) {
+      const rank = getRankLocally(allCards);
+      if (rank > 0) {
+          console.log("rank " + rank);
           return ALL_IN;
 
       }
