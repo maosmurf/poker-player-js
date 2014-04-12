@@ -8,7 +8,7 @@ var helper = require('./helper');
 
 module.exports = {
 
-  VERSION: "Default JavaScript folding player XXX33YYY",
+  VERSION: "Default JavaScript folding player XXX35YYY",
 
   bet_request: function(game_state) {
 

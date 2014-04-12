@@ -206,7 +206,7 @@ module.exports = {
         }
         if (rank > 0) {
             console.log("rank " + rank);
-            return game.currentBuyIn;
+            return game.current_buy_in;
         }
 
 
