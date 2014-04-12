@@ -26,11 +26,14 @@ function countCoolCard(holeCards)
 
 function raiseAmount(game, me, raiseFactor)
 {
-    return game.current_buy_in - me.bet + raiseFactor * game.minumum_raise;
+    var currentBuyIn = game.current_buy_in;
+    var bet = me.bet;
+    var minumumRaise = game.minimum_raise;
+    return currentBuyIn - bet + raiseFactor * minumumRaise;
 }
 module.exports = {
 
-  VERSION: "Default JavaScript folding player V8",
+  VERSION: "Default JavaScript folding player V9",
 
   bet_request: function(game_state) {
       var game = JSON.parse(game_state);
