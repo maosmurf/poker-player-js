@@ -1,3 +1,4 @@
+var helper = require('./helper');
 var player = require('./player');
 var express = require('express');
 var app = express();
