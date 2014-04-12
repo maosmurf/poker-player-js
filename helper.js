@@ -187,7 +187,7 @@ module.exports = {
                     console.log("bet too high 2, folding");
                     return 0;
                 }
-                console.log("1 countCoolCard 2");
+                return potetntialRaise;
             }
             return 0;
         }
