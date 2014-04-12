@@ -24,6 +24,10 @@ function countCoolCard(holeCards)
     return myCoolCards;
 }
 
+function raiseAmount(game, me, raiseFactor)
+{
+    return game.current_buy_in - me.bet + raiseFactor * game.minumum_raise;
+}
 module.exports = {
 
   VERSION: "Default JavaScript folding player V7",
@@ -35,15 +39,15 @@ module.exports = {
       if (weArePreflop(game))
       {
           if (weHavePairs(holeCards)) {
-              return game.current_buy_in - me.bet + 8 * game.minumum_raise;
+              return  raiseAmount(game, me, 8);
           }
           if (countCoolCard(holeCards) == 2) {
-              return game.current_buy_in - me.bet + 8 * game.minumum_raise;
+              return raiseAmount(game, me, 8);
           }
           if (countCoolCard(holeCards) == 1) {
-              return game.current_buy_in - me.bet + 5 * game.minumum_raise;
+              return raiseAmount(game, me, 5);
           }
-          return game.current_buy_in - me.bet + 3 * game.minumum_raise;
+          return raiseAmount(game, me, 3);
       }
       return 0;
   },
