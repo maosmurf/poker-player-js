@@ -142,7 +142,13 @@ module.exports = {
             }
             if (this.countCoolCard(me.hole_cards) == 2) {
                 console.log("2 countCoolCard N");
-                return this.raiseTimes(game, me, 4);
+
+                const potential = this.raiseTimes(game, me, 4);
+                if (this.betTooLargeForMyStack(potential, me.stack, 30)) {
+                    console.log("bet too high N, calling");
+                    return this.callAmount(game);
+                }
+                return  potential;
             }
             if (this.countCoolCard(me.hole_cards) == 1) {
                 console.log("1 countCoolCard N");
@@ -183,7 +189,12 @@ module.exports = {
             }
             if (this.countCoolCard(me.hole_cards) == 2) {
                 console.log("2 countCoolCard 2");
-                return this.raiseTimes(game, me, 4);
+                const potential = this.raiseTimes(game, me, 4);
+                if (this.betTooLargeForMyStack(potential, me.stack, 50)) {
+                    console.log("bet too high 2, calling");
+                    return this.callAmount(game);
+                }
+                return  potential;
             }
             if (this.countCoolCard(me.hole_cards) == 1) {
                 console.log("1 countCoolCard 2");
