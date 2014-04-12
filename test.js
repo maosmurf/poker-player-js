@@ -67,6 +67,15 @@ exports.testPlayersQuery = function(test){
     test.done();
 };
 
+exports.testCountCoolCard = function(test){
+    test.equals(helper.betTooLargeForMyStack(610, 1000), false);
+    test.equals(helper.betTooLargeForMyStack(200, 1000), true);
+    test.equals(helper.betTooLargeForMyStack(10, 1000), true);
+    test.equals(helper.betTooLargeForMyStack(0, 1000), true);
+    test.equals(helper.betTooLargeForMyStack(2000, 1000), false);
+    test.done();
+};
+
 
 
 
