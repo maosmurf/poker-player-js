@@ -8,9 +8,9 @@ var helper = require('./helper');
 
 module.exports = {
 
-  VERSION: "Default JavaScript folding player V27",
+  VERSION: "Default JavaScript folding player XXX31YYY",
 
-  bet_request: function(game_state) {
+  bet_request: function(game_state) {1
 
       var game = JSON.parse(game_state);
       var me = game.players[game.in_action];
