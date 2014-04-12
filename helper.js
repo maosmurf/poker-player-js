@@ -117,7 +117,7 @@ module.exports = {
     callAmount: function(game) {
         var me = game.players[game.in_action];
         return this.raiseAmount(game, me, 0);
-        
+
     },
     countActivePlayers: function(players) {
         var activePlayers = 0;
@@ -127,11 +127,11 @@ module.exports = {
                 activePlayers++;
             }
         });
-
         return activePlayers;
     },
+
     strategyThreeOrMore: function(game) {
-        
+
         var me = game.players[game.in_action];
         console.log("strat N");
         if (this.weArePreflop(game)) {
@@ -150,9 +150,9 @@ module.exports = {
             }
             return 0;
         }
-  
+
         var allCards = me.hole_cards.concat(game.community_cards);
-  
+
         const rank = this.getRankLocally(allCards);
         if (rank > 1) {
             console.log("rank " + rank);
@@ -162,8 +162,8 @@ module.exports = {
             console.log("rank " + rank);
             return this.callAmount(game);
         }
-        
-        
+
+
         return 0;
     },
     strategyHeadsUp: function(game) {
@@ -186,9 +186,9 @@ module.exports = {
             }
             return 0;
         }
-  
+
         var allCards = me.hole_cards.concat(game.community_cards);
-  
+
         const rank = this.getRankLocally(allCards);
         if (rank > 1) {
             console.log("rank " + rank);
@@ -198,10 +198,15 @@ module.exports = {
             console.log("rank " + rank);
             return game.currentBuyIn;
         }
-        
-        
+
+
         return 0;
-        
+    },
+    betTooLargeForMyStack: function(potentialRaise, stack, percentOfStack) {
+        if ((100 / stack * potentialRaise) > percentOfStack) {
+            return false
+        }
+        return true;
     }
 };
 

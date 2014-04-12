@@ -68,11 +68,14 @@ exports.testPlayersQuery = function(test){
 };
 
 exports.testCountCoolCard = function(test){
-    test.equals(helper.betTooLargeForMyStack(610, 1000), false);
-    test.equals(helper.betTooLargeForMyStack(200, 1000), true);
-    test.equals(helper.betTooLargeForMyStack(10, 1000), true);
-    test.equals(helper.betTooLargeForMyStack(0, 1000), true);
-    test.equals(helper.betTooLargeForMyStack(2000, 1000), false);
+    test.equals(helper.betTooLargeForMyStack(610, 1000, 60), false);
+    test.equals(helper.betTooLargeForMyStack(610.9, 1000, 60), false);
+    test.equals(helper.betTooLargeForMyStack(200, 1000, 60), true);
+    test.equals(helper.betTooLargeForMyStack(200.5, 1000, 60), true);
+    test.equals(helper.betTooLargeForMyStack(10, 1000, 60), true);
+    test.equals(helper.betTooLargeForMyStack(10.1, 1000, 60), true);
+    test.equals(helper.betTooLargeForMyStack(0, 1000, 60), true);
+    test.equals(helper.betTooLargeForMyStack(2000, 1000, 60), false);
     test.done();
 };
 
