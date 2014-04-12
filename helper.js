@@ -112,10 +112,15 @@ module.exports = {
 
     },
     countActivePlayers: function(players) {
-        players.forEach(function(){});
+        var activePlayers = 0;
+        players.forEach(function(player){
+            if (player.status == 'active')
+            {
+                activePlayers++;
+            }
+        });
 
-        return 1;
-
+        return activePlayers;
     }
 };
 
