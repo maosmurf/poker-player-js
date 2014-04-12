@@ -30,7 +30,7 @@ function raiseAmount(game, me, raiseFactor)
 }
 module.exports = {
 
-  VERSION: "Default JavaScript folding player V7",
+  VERSION: "Default JavaScript folding player V8",
 
   bet_request: function(game_state) {
       var game = JSON.parse(game_state);
