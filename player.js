@@ -37,7 +37,7 @@ function raiseAmount(game, me, raiseFactor)
     var minimumRaise = game.minimum_raise;
     return currentBuyIn - bet + raiseFactor * minimumRaise;
 }
-function getRank(game)
+function getRank(game, holeCards)
 {
     var allCards = holeCards.concat(game.community_cards);
 
@@ -53,7 +53,7 @@ function getRank(game)
 
 module.exports = {
 
-  VERSION: "Default JavaScript folding player V11",
+  VERSION: "Default JavaScript folding player V12",
 
   bet_request: function(game_state) {
 
@@ -78,7 +78,7 @@ module.exports = {
           return raiseAmount(game, me, 1);
       }
       console.log('rank');
-      var rank = getRank(game);
+      var rank = getRank(game, me.hole_cards);
       console.log(rank);
 
       return 0;
