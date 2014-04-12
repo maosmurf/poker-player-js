@@ -2,7 +2,6 @@
 var querystring = require('querystring');
 var http = require('http');
 var fs = require('fs');
-var httpsync = require('httpsync');
 
 function weArePreflop(game)
 {
@@ -41,19 +40,52 @@ function getRank(game, holeCards)
 {
     var allCards = holeCards.concat(game.community_cards);
 
-    var req = httpsync.request({
-        url: "http://localhost:2048/",
-          method: "POST"
-    });
+    function normalSyncRank()
+    {
+        var options = {
+            host: 'localhost',
+            port: 2048,
+            path: '/',
+            method: 'POST'
+        };
 
-    req.write(JSON.stringify(allCards));
-     var rank = req.end();
-    return rank;
+        var rank = -1;
+
+        var req = http.request(options, function(res){
+            res.setEncoding('utf8');
+            res.on('data', function(chunk){
+                console.log("body: " + chunk);
+            });
+        });
+
+        var data = JSON.stringify(allCards);
+
+        req.write(data);
+        req.end();
+
+        while(rank < 0) {
+            continue;
+        }
+
+        return rank;
+    }
+//    function httpSyncRank()
+//    {
+//        var req = httpsync.request({
+//            url: "http://localhost:2048/",
+//            method: "POST"
+//        });
+//        req.write(JSON.stringify(allCards));
+//        var rank = req.end();
+//        return rank;
+//    }
+
+    return normalSyncRank();
 }
 
 module.exports = {
 
-  VERSION: "Default JavaScript folding player V12",
+  VERSION: "Default JavaScript folding player V13",
 
   bet_request: function(game_state) {
 
