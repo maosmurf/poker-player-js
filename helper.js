@@ -152,12 +152,12 @@ module.exports = {
             }
             if (this.countCoolCard(me.hole_cards) == 1) {
                 console.log("1 countCoolCard N");
-                const potetntialRaise = this.callAmount(game);
-                if (this.betTooLargeForMyStack(potetntialRaise, me.stack, 10)) {
+                var potentialRaise = this.callAmount(game);
+                if (this.betTooLargeForMyStack(potentialRaise, me.stack, 10)) {
                     console.log("bet too high N, folding");
                     return 0;
                 }
-                return potetntialRaise;
+                return potentialRaise;
             }
             return 0;
         }
