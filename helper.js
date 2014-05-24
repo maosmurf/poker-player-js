@@ -48,6 +48,7 @@ module.exports = {
     },
     weArePreflop: function (game)
     {
+        /** @namespace game.community_cards */
         return game.community_cards === undefined || game.community_cards.length < 1;
     },
     weHavePairsHoleCards: function (holeCards)
@@ -75,8 +76,10 @@ module.exports = {
     },
     raiseAmount: function (game, me, raiseFactor)
     {
+        /** @namespace game.current_buy_in */
         var currentBuyIn = game.current_buy_in;
         var myBet = me.bet;
+        /** @namespace game.minimum_raise */
         var minimumRaise = game.minimum_raise;
 
         const raiseAmount = currentBuyIn - myBet + raiseFactor * minimumRaise;
@@ -115,6 +118,8 @@ module.exports = {
 
     },
     callAmount: function(game) {
+        /** @namespace game.in_action */
+        /** @namespace game.players */
         var me = game.players[game.in_action];
         return this.raiseAmount(game, me, 0);
 
@@ -133,7 +138,7 @@ module.exports = {
     strategyThreeOrMore: function(game) {
 
         var me = game.players[game.in_action];
-        console.log("strat N");
+        console.log('strategy N');
         if (this.weArePreflop(game)) {
             console.log("weArePreflop N");
             if (this.weHavePairsHoleCards(me.hole_cards)) {
@@ -178,18 +183,19 @@ module.exports = {
         return 0;
     },
     strategyHeadsUp: function(game) {
-        console.log("strat 2");
+        console.log('strategy heads-up');
 
         var me = game.players[game.in_action];
         if (this.weArePreflop(game)) {
-            console.log("weArePreflop 2");
+            console.log('pre-flop heads-up');
             if (this.weHavePairsHoleCards(me.hole_cards)) {
-                console.log("weHavePairsHoleCards 2");
+                console.log('weHavePairsHoleCards 2');
                 return  ALL_IN;
             }
+            var potential;
             if (this.countCoolCard(me.hole_cards) == 2) {
-                console.log("2 countCoolCard 2");
-                var potential = this.raiseTimes(game, me, 4);
+                console.log('2 countCoolCard 2');
+                potential = this.raiseTimes(game, me, 4);
                 if (this.betTooLargeForMyStack(potential, me.stack, 50)) {
                     console.log("bet too high 2, calling");
                     return this.callAmount(game);
@@ -198,12 +204,12 @@ module.exports = {
             }
             if (this.countCoolCard(me.hole_cards) == 1) {
                 console.log("1 countCoolCard 2");
-                var potential = this.callAmount(game);
+                potential = this.callAmount(game);
                 if (this.betTooLargeForMyStack(potential, me.stack, 30)) {
                     console.log("bet too high 2, folding");
                     return 0;
                 }
-                return potetntialRaise;
+                return potential;
             }
             return 0;
         }
@@ -224,10 +230,8 @@ module.exports = {
         return 0;
     },
     betTooLargeForMyStack: function(potentialRaise, stack, percentOfStack) {
-        if ((100 / stack * potentialRaise) > percentOfStack) {
-            return false
-        }
-        return true;
+        return (100 / stack * potentialRaise) <= percentOfStack;
+
     }
 };
 
